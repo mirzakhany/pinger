@@ -17,6 +17,7 @@ limitations under the License.
 package v1alpha1
 
 import (
+	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -25,17 +26,29 @@ import (
 
 // PingerSpec defines the desired state of Pinger
 type PingerSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	//+kubebuilder:validation:MinLength=0
 
-	// Foo is an example field of Pinger. Edit pinger_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// The schedule in Cron format, see https://en.wikipedia.org/wiki/Cron.
+	Schedule string `json:"schedule"`
+
+	//+kubebuilder:validation:MinLength=0
+
+	// Target address to ping
+	TargetAddress string `json:"TargetAddress"`
 }
 
 // PingerStatus defines the observed state of Pinger
 type PingerStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
+
+	// A list of pointers to currently running jobs
+	// +optional
+	Active []corev1.ObjectReference `json:"active,omitempty"`
+
+	// Last ping time
+	// +optional
+	LastPingTimes []*metav1.Time `json:"lastPingTimes,omitempty"`
 }
 
 //+kubebuilder:object:root=true
