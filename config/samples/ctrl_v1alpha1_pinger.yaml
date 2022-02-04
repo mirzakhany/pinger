@@ -1,0 +1,6 @@
+apiVersion: ctrl.k8s.mirzakhani.me/v1alpha1
+kind: Pinger
+metadata:
+  name: pinger-sample
+spec:
+  # TODO(user): Add fields here
