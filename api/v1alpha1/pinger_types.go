@@ -28,11 +28,6 @@ import (
 type PingerSpec struct {
 	//+kubebuilder:validation:MinLength=0
 
-	// The schedule in Cron format, see https://en.wikipedia.org/wiki/Cron.
-	Schedule string `json:"schedule"`
-
-	//+kubebuilder:validation:MinLength=0
-
 	// Target address to ping
 	TargetAddress string `json:"TargetAddress"`
 }
